@@ -17,6 +17,15 @@ public class Activity {
 	private String time;
 	private String type;
 	
+	public Activity(int level, String location, String name, String time, String type) {
+		super();
+		this.level = level;
+		this.location = location;
+		this.name = name;
+		this.time = time;
+		this.type = type;
+	}
+
 	public Activity() {}
 	
 	@Id

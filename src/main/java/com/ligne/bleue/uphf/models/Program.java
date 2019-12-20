@@ -13,8 +13,15 @@ public class Program {
 	private Long programId;
 	private int level;
 	private String name;
-	private int objecive;
+	private int objective;	
 	
+	public Program(int level, String name, int objective) {
+		super();
+		this.level = level;
+		this.name = name;
+		this.objective = objective;
+	}
+
 	public Program() {}
 	
 	@Id
@@ -37,11 +44,11 @@ public class Program {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getObjecive() {
-		return objecive;
+	public int getObjective() {
+		return objective;
 	}
-	public void setObjecive(int objecive) {
-		this.objecive = objecive;
+	public void setObjective(int objective) {
+		this.objective = objective;
 	}
 	
 }

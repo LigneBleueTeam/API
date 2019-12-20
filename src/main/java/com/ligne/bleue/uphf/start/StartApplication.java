@@ -8,9 +8,13 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+import com.ligne.bleue.uphf.models.Activity;
+import com.ligne.bleue.uphf.models.Program;
 import com.ligne.bleue.uphf.models.Role;
 import com.ligne.bleue.uphf.models.User;
 import com.ligne.bleue.uphf.repositories.RoleRepository;
+import com.ligne.bleue.uphf.services.ActivityService;
+import com.ligne.bleue.uphf.services.ProgramService;
 import com.ligne.bleue.uphf.services.UserService;
 
 @SpringBootApplication
@@ -22,6 +26,10 @@ public class StartApplication implements CommandLineRunner {
 	
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private ProgramService programService;
+	@Autowired
+	private ActivityService activityService;
 	@Autowired
 	private RoleRepository roleRepo;
 
@@ -38,6 +46,14 @@ public class StartApplication implements CommandLineRunner {
 		Role role1 = new Role("USER");
 		Role role2 = new Role("ADMIN");
 		
+		Activity a1 = new Activity(1, "ISTV 1", "Abdos", "20 mins", "Type 1");
+		Activity a2 = new Activity(2, "ISTV 2", "Push up", "40 mins", "Type 2");
+		Activity a3 = new Activity(1, "ISTV 3", "Marathon", "2 heures", "Type 3");
+		
+		Program p1 = new Program(1, "Perte de poids",1);
+		Program p2 = new Program(2, "Gagner du poids",3);
+		Program p3 = new Program(3, "Les abdos",2);
+		
 		user1.getRoles().add(role1);
 		user1.getRoles().add(role2);
 		user2.getRoles().add(role1);
@@ -48,7 +64,15 @@ public class StartApplication implements CommandLineRunner {
 		
 		userService.saveUser(user1);
 		userService.saveUser(user2);
-		userService.saveUser(user3);			
+		userService.saveUser(user3);
+		
+		programService.saveProgram(p1);
+		programService.saveProgram(p2);
+		programService.saveProgram(p3);
+		
+		activityService.saveActivity(a1);
+		activityService.saveActivity(a2);
+		activityService.saveActivity(a3);
 	}
 
 }

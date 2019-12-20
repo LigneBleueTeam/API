@@ -81,7 +81,7 @@ public class UserController {
 			if (!userDetails.getRoles().isEmpty()) {
 				user.setRoles(userDetails.getRoles());
 			}
-			
+
 			User updatedUser = userService.saveUser(user);
 			return ResponseEntity.ok().body(updatedUser);
 		}
