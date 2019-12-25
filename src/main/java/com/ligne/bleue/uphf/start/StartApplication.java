@@ -42,7 +42,10 @@ public class StartApplication implements CommandLineRunner {
 		User user1 = new User("Samad", "BD","Adult",190, 90, "0755060213", "samad@gfx.bd", "password_2019");
 		User user2 = new User("Messi", "RF","Kid",180, 80, "0755060213", "messi@tiznit.ma", "password_2019");
 		User user3 = new User("Josèphe", "De Nazareth", "Adult",200, 100, "0755060213","josephe@legion.mk", "password_2019");
+		User user4 = new User("Msika", "Manfalouti", "Adult",200, 100, "0755060213","msika@manf.ma", "password_2019");
+		User user5 = new User("Moutcho", "Deprio", "Adult",200, 100, "0755060213","moutcho@uphf.fr", "password_2019");
 
+		
 		Role role1 = new Role("USER");
 		Role role2 = new Role("ADMIN");
 		
@@ -58,6 +61,8 @@ public class StartApplication implements CommandLineRunner {
 		user1.getRoles().add(role2);
 		user2.getRoles().add(role1);
 		user3.getRoles().add(role1);
+		user4.getRoles().add(role1);
+		user5.getRoles().add(role1);
 		
 		roleRepo.save(role1);
 		roleRepo.save(role2);
@@ -65,6 +70,8 @@ public class StartApplication implements CommandLineRunner {
 		userService.saveUser(user1);
 		userService.saveUser(user2);
 		userService.saveUser(user3);
+		userService.saveUser(user4);
+		userService.saveUser(user5);
 		
 		programService.saveProgram(p1);
 		programService.saveProgram(p2);

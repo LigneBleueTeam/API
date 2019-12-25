@@ -78,6 +78,15 @@ public class UserController {
 			if (userDetails.getPassword() != null) {
 				user.setPassword(userDetails.getPassword());
 			}
+			if (userDetails.getWeight() != 0) {
+				user.setWeight(userDetails.getWeight());
+			}
+			if (userDetails.getHeight() != 0) {
+				user.setHeight(userDetails.getHeight());
+			}
+			if (userDetails.getPhoneNumber() != null) {
+				user.setPhoneNumber(userDetails.getPhoneNumber());
+			}
 			if (!userDetails.getRoles().isEmpty()) {
 				user.setRoles(userDetails.getRoles());
 			}
