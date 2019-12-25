@@ -18,7 +18,7 @@ import com.ligne.bleue.uphf.models.Activity;
 import com.ligne.bleue.uphf.services.ActivityService;
 
 @RestController
-@RequestMapping("/activity")
+@RequestMapping("/api/activity")
 public class ActivityController {
 
 	@Autowired

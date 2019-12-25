@@ -18,7 +18,7 @@ import com.ligne.bleue.uphf.models.Program;
 import com.ligne.bleue.uphf.services.ProgramService;
 
 @RestController
-@RequestMapping("/program")
+@RequestMapping("/api/program")
 public class ProgramController {
 
 	@Autowired

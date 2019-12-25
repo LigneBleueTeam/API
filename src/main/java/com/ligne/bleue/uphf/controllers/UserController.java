@@ -18,7 +18,7 @@ import com.ligne.bleue.uphf.models.User;
 import com.ligne.bleue.uphf.services.UserService;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 public class UserController {
 
 	@Autowired
