@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ligne.bleue.uphf.exeptions.EmptyFieldsException;
+import com.ligne.bleue.uphf.exeptions.UserNotFoundException;
 import com.ligne.bleue.uphf.models.User;
 import com.ligne.bleue.uphf.services.UserService;
 
@@ -29,11 +31,11 @@ public class UserController {
 	 **/
 	@GetMapping("/{id}")
 	public ResponseEntity<User> getUser(@PathVariable(value = "id") Long id) {
-		User user = userService.getUser(id);
-		if (user == null) {
-			return ResponseEntity.notFound().build();
-		} else {
+		try {
+			User user = userService.getUser(id);
 			return ResponseEntity.ok().body(user);
+		} catch (Exception e) {
+			throw new UserNotFoundException(id);
 		}
 	}
 
@@ -42,15 +44,25 @@ public class UserController {
 	 **/
 	@GetMapping("/all")
 	public List<User> getAllUsers() {
-		return userService.getAllUsers();
+		if (userService.getAllUsers().isEmpty()) {
+			throw new UserNotFoundException();
+		} else {
+			return userService.getAllUsers();
+		}
 	}
 
 	/**
 	 * Create a new user
 	 **/
 	@PostMapping("/save")
-	public User createUser(@Valid @RequestBody User user) {
-		return userService.saveUser(user);
+	public User createUser(@RequestBody User user) {
+		if (user.getEmail() == null || user.getFirstName() == null || user.getHeight() == 0
+				|| user.getLastName() == null || user.getPassword() == null || user.getPhoneNumber() == null
+				|| user.getRoles().isEmpty() || user.getTypeUser() == null || user.getWeight() == 0) {
+			throw new EmptyFieldsException();
+		} else {
+			return userService.saveUser(user);
+		}
 	}
 
 	/**
@@ -58,11 +70,10 @@ public class UserController {
 	 **/
 	@PutMapping("/{id}")
 	public ResponseEntity<User> updateUser(@PathVariable(value = "id") Long id, @Valid @RequestBody User userDetails) {
-		User user = userService.getUser(id);
+		User user = null;
+		try {
+			user = userService.getUser(id);
 
-		if (user == null) {
-			return ResponseEntity.notFound().build();
-		} else {
 			if (userDetails.getFirstName() != null) {
 				user.setFirstName(userDetails.getFirstName());
 			}
@@ -93,7 +104,12 @@ public class UserController {
 
 			User updatedUser = userService.saveUser(user);
 			return ResponseEntity.ok().body(updatedUser);
+		} catch (Exception e) {
+			if (user == null) {
+				throw new UserNotFoundException(id);
+			} else {
+				throw new EmptyFieldsException();
+			}
 		}
 	}
-
 }

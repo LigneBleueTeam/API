@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ligne.bleue.uphf.exeptions.ActivityNotFoundException;
+import com.ligne.bleue.uphf.exeptions.EmptyFieldsException;
 import com.ligne.bleue.uphf.models.Activity;
 import com.ligne.bleue.uphf.services.ActivityService;
 
@@ -29,11 +31,11 @@ public class ActivityController {
 	 **/
 	@GetMapping("/{id}")
 	public ResponseEntity<Activity> getActivity(@PathVariable(value = "id") Long id) {
-		Activity a = activityService.getActivity(id);
-		if (a == null) {
-			return ResponseEntity.notFound().build();
-		} else {
+		try {
+			Activity a = activityService.getActivity(id);
 			return ResponseEntity.ok().body(a);
+		} catch (Exception e) {
+			throw new ActivityNotFoundException(id);
 		}
 	}
 
@@ -42,7 +44,11 @@ public class ActivityController {
 	 **/
 	@GetMapping("/all")
 	public List<Activity> getAllActivities() {
-		return activityService.getAllActivities();
+		if (activityService.getAllActivities().isEmpty()) {
+			throw new ActivityNotFoundException();
+		} else {
+			return activityService.getAllActivities();
+		}
 	}
 
 	/**
@@ -50,7 +56,12 @@ public class ActivityController {
 	 **/
 	@PostMapping("/save")
 	public Activity createActivity(@Valid @RequestBody Activity a) {
-		return activityService.saveActivity(a);
+		if (a.getLevel() == 0 || a.getLocation() == null || a.getName() == null || a.getTime() == null
+				|| a.getType() == null) {
+			throw new EmptyFieldsException();
+		} else {
+			return activityService.saveActivity(a);
+		}
 	}
 
 	/**
@@ -59,11 +70,11 @@ public class ActivityController {
 	@PutMapping("/{id}")
 	public ResponseEntity<Activity> updateActivity(@PathVariable(value = "id") Long id,
 			@Valid @RequestBody Activity activityDetails) {
-		Activity a = activityService.getActivity(id);
+		Activity a = null;
 
-		if (a == null) {
-			return ResponseEntity.notFound().build();
-		} else {
+		try {
+			a = activityService.getActivity(id);
+
 			if (activityDetails.getLevel() != 0) {
 				a.setLevel(activityDetails.getLevel());
 			}
@@ -79,9 +90,15 @@ public class ActivityController {
 			if (activityDetails.getType() != null) {
 				a.setType(activityDetails.getType());
 			}
-		}
 
-		Activity updatedActivity = activityService.saveActivity(a);
-		return ResponseEntity.ok().body(updatedActivity);
+			Activity updatedActivity = activityService.saveActivity(a);
+			return ResponseEntity.ok().body(updatedActivity);
+		} catch (Exception e) {
+			if (a == null) {
+				throw new ActivityNotFoundException(id);
+			} else {
+				throw new EmptyFieldsException();
+			}
+		}
 	}
 }

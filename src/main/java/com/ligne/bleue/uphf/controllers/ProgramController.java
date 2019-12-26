@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ligne.bleue.uphf.exeptions.EmptyFieldsException;
+import com.ligne.bleue.uphf.exeptions.ProgramNotFoundException;
 import com.ligne.bleue.uphf.models.Program;
 import com.ligne.bleue.uphf.services.ProgramService;
 
@@ -29,11 +31,11 @@ public class ProgramController {
 	 **/
 	@GetMapping("/{id}")
 	public ResponseEntity<Program> getProgram(@PathVariable(value = "id") Long id) {
-		Program program = programService.getProgram(id);
-		if (program == null) {
-			return ResponseEntity.notFound().build();
-		} else {
+		try {
+			Program program = programService.getProgram(id);
 			return ResponseEntity.ok().body(program);
+		} catch (Exception e) {
+			throw new ProgramNotFoundException(id);
 		}
 	}
 
@@ -42,7 +44,11 @@ public class ProgramController {
 	 **/
 	@GetMapping("/all")
 	public List<Program> getAllPrograms() {
-		return programService.getAllPrograms();
+		if (programService.getAllPrograms().isEmpty()) {
+			throw new ProgramNotFoundException();
+		} else {
+			return programService.getAllPrograms();
+		}
 	}
 
 	/**
@@ -50,7 +56,11 @@ public class ProgramController {
 	 **/
 	@PostMapping("/save")
 	public Program createProgram(@Valid @RequestBody Program program) {
-		return programService.saveProgram(program);
+		if (program.getLevel() == 0 || program.getName() == null || program.getObjective() == 0) {
+			throw new EmptyFieldsException();
+		} else {
+			return programService.saveProgram(program);
+		}
 	}
 
 	/**
@@ -59,11 +69,10 @@ public class ProgramController {
 	@PutMapping("/{id}")
 	public ResponseEntity<Program> updateProgram(@PathVariable(value = "id") Long id,
 			@Valid @RequestBody Program programDetails) {
-		Program program = programService.getProgram(id);
+		Program program = null;
+		try {
+			program = programService.getProgram(id);
 
-		if (program == null) {
-			return ResponseEntity.notFound().build();
-		} else {
 			if (programDetails.getLevel() != 0) {
 				program.setLevel(programDetails.getLevel());
 			}
@@ -76,6 +85,12 @@ public class ProgramController {
 
 			Program updatedProgram = programService.saveProgram(program);
 			return ResponseEntity.ok().body(updatedProgram);
+		} catch (Exception e) {
+			if (program == null) {
+				throw new ProgramNotFoundException(id);
+			} else {
+				throw new EmptyFieldsException();
+			}
 		}
 	}
 
