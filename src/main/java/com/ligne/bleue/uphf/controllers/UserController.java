@@ -1,5 +1,6 @@
 package com.ligne.bleue.uphf.controllers;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ligne.bleue.uphf.exeptions.EmptyFieldsException;
+import com.ligne.bleue.uphf.exeptions.Success;
 import com.ligne.bleue.uphf.exeptions.UserNotFoundException;
 import com.ligne.bleue.uphf.models.User;
 import com.ligne.bleue.uphf.services.UserService;
@@ -55,13 +57,13 @@ public class UserController {
 	 * Create a new user
 	 **/
 	@PostMapping("/save")
-	public User createUser(@RequestBody User user) {
+	public ResponseEntity<Success> createUser(@RequestBody User user) {
 		if (user.getEmail() == null || user.getFirstName() == null || user.getHeight() == 0
 				|| user.getLastName() == null || user.getPassword() == null || user.getPhoneNumber() == null
 				|| user.getRoles().isEmpty() || user.getTypeUser() == null || user.getWeight() == 0) {
 			throw new EmptyFieldsException();
 		} else {
-			return userService.saveUser(user);
+			return ResponseEntity.ok().body(new Success(true, "Utilisateur crée avec succès.", new Date()));
 		}
 	}
 
@@ -69,7 +71,8 @@ public class UserController {
 	 * Update a user
 	 **/
 	@PutMapping("/{id}")
-	public ResponseEntity<User> updateUser(@PathVariable(value = "id") Long id, @Valid @RequestBody User userDetails) {
+	public ResponseEntity<Success> updateUser(@PathVariable(value = "id") Long id,
+			@Valid @RequestBody User userDetails) {
 		User user = null;
 		try {
 			user = userService.getUser(id);
@@ -102,8 +105,7 @@ public class UserController {
 				user.setRoles(userDetails.getRoles());
 			}
 
-			User updatedUser = userService.saveUser(user);
-			return ResponseEntity.ok().body(updatedUser);
+			return ResponseEntity.ok().body(new Success(true, "Utilisateur modifié avec succès.", new Date()));
 		} catch (Exception e) {
 			if (user == null) {
 				throw new UserNotFoundException(id);

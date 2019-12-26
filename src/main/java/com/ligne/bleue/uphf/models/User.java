@@ -27,7 +27,8 @@ public class User {
 	private String phoneNumber;
 	private List<Role> roles = new ArrayList<>();
 
-	public User(String lastName, String firstName, String typeUser,float height, float weight, String phoneNumber, String email, String password) {
+	public User(String lastName, String firstName, String typeUser, float height, float weight, String phoneNumber,
+			String email, String password) {
 		super();
 		this.firstName = lastName;
 		this.lastName = firstName;
@@ -39,7 +40,8 @@ public class User {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public User() {}
+	public User() {
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
