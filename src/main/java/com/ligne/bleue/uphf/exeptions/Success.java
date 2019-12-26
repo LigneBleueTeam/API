@@ -7,10 +7,10 @@ public class Success {
 	private boolean success;
 	private String message;
 
-	public Success(boolean success, String msg, Date timestamp) {
+	public Success(boolean success, String message, Date timestamp) {
 		super();
 		this.success = success;
-		this.message = msg;
+		this.message = message;
 		this.timestamp = timestamp;
 	}
 
@@ -22,12 +22,12 @@ public class Success {
 		this.success = success;
 	}
 
-	public String getMsg() {
+	public String getMessage() {
 		return message;
 	}
 
-	public void setMsg(String msg) {
-		this.message = msg;
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
 	public Date getTimestamp() {
