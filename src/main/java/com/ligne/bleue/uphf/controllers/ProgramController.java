@@ -61,6 +61,7 @@ public class ProgramController {
 		if (program.getLevel() == 0 || program.getName() == null || program.getObjective() == 0) {
 			throw new EmptyFieldsException();
 		} else {
+			programService.saveProgram(program);
 			return ResponseEntity.ok().body(new Success(true, "Programme crée avec succès.", new Date()));
 		}
 	}
@@ -85,6 +86,7 @@ public class ProgramController {
 				program.setObjective(programDetails.getObjective());
 			}
 
+			programService.saveProgram(program);
 			return ResponseEntity.ok().body(new Success(true,"Programme modifié avec succès.",new Date()));
 			
 		} catch (Exception e) {

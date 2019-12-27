@@ -62,6 +62,7 @@ public class ActivityController {
 				|| a.getType() == null) {
 			throw new EmptyFieldsException();
 		} else {
+			activityService.saveActivity(a);
 			return ResponseEntity.ok().body(new Success(true, "Activité créée avec succès.", new Date()));
 
 		}
@@ -94,6 +95,7 @@ public class ActivityController {
 				a.setType(activityDetails.getType());
 			}
 
+			activityService.saveActivity(a);
 			return ResponseEntity.ok().body(new Success(true, "Activité modifiée avec succès.", new Date()));
 
 		} catch (Exception e) {

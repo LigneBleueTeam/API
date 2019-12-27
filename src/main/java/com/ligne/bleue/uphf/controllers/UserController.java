@@ -63,6 +63,7 @@ public class UserController {
 				|| user.getRoles().isEmpty() || user.getTypeUser() == null || user.getWeight() == 0) {
 			throw new EmptyFieldsException();
 		} else {
+			userService.saveUser(user);
 			return ResponseEntity.ok().body(new Success(true, "Utilisateur crée avec succès.", new Date()));
 		}
 	}
@@ -104,7 +105,8 @@ public class UserController {
 			if (!userDetails.getRoles().isEmpty()) {
 				user.setRoles(userDetails.getRoles());
 			}
-
+			
+			userService.saveUser(user);
 			return ResponseEntity.ok().body(new Success(true, "Utilisateur modifié avec succès.", new Date()));
 		} catch (Exception e) {
 			if (user == null) {
