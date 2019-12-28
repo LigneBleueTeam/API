@@ -5,7 +5,7 @@
 GET >> /api/user/{id} : Get a user by id<br/>
 GET >> /api/user/all: Get all users<br/>
 POST >> /api/user/save : Create a new user<br/>
-	### EXAMPLE :
+	### EXAMPLE :<br/>
 		{
         "firstName": "Anass",
         "lastName": "Tboguissa",
@@ -40,8 +40,8 @@ POST >> /api/user/save : Create a new user<br/>
 		"details": "Paramètre manquant ou invalide."
 		}
 		
-PUT >> /api/user/{id} : Update a user info with desired params
-	### EXAMPLE :
+PUT >> /api/user/{id} : Update a user info with desired params<br/>
+	### EXAMPLE :<br/>
 		{
         "password": "&é'(--è-*/"
 		}
@@ -59,7 +59,7 @@ PUT >> /api/user/{id} : Update a user info with desired params
 GET >> /api/activity/{id} : Get an activity by id<br/>
 GET >> /api/activity/all: Get all activities<br/>
 POST >> /api/activity/save : Create a new activity<br/>
-	### EXAMPLE :
+	### EXAMPLE :<br/>
 		{
 		"level":1,
 		"location":"Zone 1",
@@ -85,8 +85,8 @@ POST >> /api/activity/save : Create a new activity<br/>
 		"details": "Paramètre manquant ou invalide."
 		}
 		
-PUT >> /api/activity/{id} : Update an activity
-	### EXAMPLE :
+PUT >> /api/activity/{id} : Update an activity<br/>
+	### EXAMPLE :<br/>
 		{
         "level": "2",
 		"time":"70"
@@ -105,7 +105,7 @@ PUT >> /api/activity/{id} : Update an activity
 GET >> /api/program/{id} : Get a program by id<br/>
 GET >> /api/program/all: Get all programs<br/>
 POST >> /api/program/save : Create a new program<br/>
-	### EXAMPLE :
+	### EXAMPLE :<br/>
 		{
 		"level":2,
 		"name":"Programme 1",
@@ -129,8 +129,8 @@ POST >> /api/program/save : Create a new program<br/>
 		"details": "Paramètre manquant ou invalide."
 		}
 		
-PUT >> /api/program/{id} : Update a program
-	### EXAMPLE :
+PUT >> /api/program/{id} : Update a program<br/>
+	### EXAMPLE :<br/>
 		{
         "level": 3
 		}
