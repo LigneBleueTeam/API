@@ -2,9 +2,9 @@
 
 ## USER
 
-GET >> /api/user/{id} : Get a user by id
-GET >> /api/user/all: Get all users
-POST >> /api/user/save : Create a new user
+GET >> /api/user/{id} : Get a user by id<br/>
+GET >> /api/user/all: Get all users<br/>
+POST >> /api/user/save : Create a new user<br/>
 	### EXAMPLE :
 		{
         "firstName": "Anass",
@@ -56,9 +56,9 @@ PUT >> /api/user/{id} : Update a user info with desired params
 		
 ## ACTIVITY
 
-GET >> /api/activity/{id} : Get an activity by id
-GET >> /api/activity/all: Get all activities
-POST >> /api/activity/save : Create a new activity
+GET >> /api/activity/{id} : Get an activity by id<br/>
+GET >> /api/activity/all: Get all activities<br/>
+POST >> /api/activity/save : Create a new activity<br/>
 	### EXAMPLE :
 		{
 		"level":1,
@@ -102,9 +102,9 @@ PUT >> /api/activity/{id} : Update an activity
 
 ## PROGRAM
 
-GET >> /api/program/{id} : Get a program by id
-GET >> /api/program/all: Get all programs
-POST >> /api/program/save : Create a new program
+GET >> /api/program/{id} : Get a program by id<br/>
+GET >> /api/program/all: Get all programs<br/>
+POST >> /api/program/save : Create a new program<br/>
 	### EXAMPLE :
 		{
 		"level":2,
