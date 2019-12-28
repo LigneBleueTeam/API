@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ligne.bleue.uphf.exeptions.EmptyFieldsException;
 import com.ligne.bleue.uphf.exeptions.ProgramNotFoundException;
-import com.ligne.bleue.uphf.exeptions.Success;
 import com.ligne.bleue.uphf.models.Program;
 import com.ligne.bleue.uphf.services.ProgramService;
+import com.ligne.bleue.uphf.util.SuccessDetails;
 
 @RestController
 @RequestMapping("/api/program")
@@ -57,12 +57,12 @@ public class ProgramController {
 	 * Create a new program
 	 **/
 	@PostMapping("/save")
-	public ResponseEntity<Success> createProgram(@Valid @RequestBody Program program) {
+	public ResponseEntity<SuccessDetails> createProgram(@Valid @RequestBody Program program) {
 		if (program.getLevel() == 0 || program.getName() == null || program.getObjective() == 0) {
 			throw new EmptyFieldsException();
 		} else {
 			programService.saveProgram(program);
-			return ResponseEntity.ok().body(new Success(true, "Programme crée avec succès.", new Date()));
+			return ResponseEntity.ok().body(new SuccessDetails(true, "Programme crée avec succès.", new Date()));
 		}
 	}
 
@@ -70,7 +70,7 @@ public class ProgramController {
 	 * Update a program
 	 **/
 	@PutMapping("/{id}")
-	public ResponseEntity<Success> updateProgram(@PathVariable(value = "id") Long id,
+	public ResponseEntity<SuccessDetails> updateProgram(@PathVariable(value = "id") Long id,
 			@Valid @RequestBody Program programDetails) {
 		Program program = null;
 		try {
@@ -87,7 +87,7 @@ public class ProgramController {
 			}
 
 			programService.saveProgram(program);
-			return ResponseEntity.ok().body(new Success(true,"Programme modifié avec succès.",new Date()));
+			return ResponseEntity.ok().body(new SuccessDetails(true,"Programme modifié avec succès.",new Date()));
 			
 		} catch (Exception e) {
 			if (program == null) {

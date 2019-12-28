@@ -1,4 +1,4 @@
-package com.ligne.bleue.uphf.exeptions;
+package com.ligne.bleue.uphf.util;
 
 import java.util.Date;
 

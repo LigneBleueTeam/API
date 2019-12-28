@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ligne.bleue.uphf.exeptions.ActivityNotFoundException;
 import com.ligne.bleue.uphf.exeptions.EmptyFieldsException;
-import com.ligne.bleue.uphf.exeptions.Success;
 import com.ligne.bleue.uphf.models.Activity;
 import com.ligne.bleue.uphf.services.ActivityService;
+import com.ligne.bleue.uphf.util.SuccessDetails;
 
 @RestController
 @RequestMapping("/api/activity")
@@ -57,13 +57,13 @@ public class ActivityController {
 	 * Create a new activity
 	 **/
 	@PostMapping("/save")
-	public ResponseEntity<Success> createActivity(@Valid @RequestBody Activity a) {
+	public ResponseEntity<SuccessDetails> createActivity(@Valid @RequestBody Activity a) {
 		if (a.getLevel() == 0 || a.getLocation() == null || a.getName() == null || a.getTime() == null
 				|| a.getType() == null) {
 			throw new EmptyFieldsException();
 		} else {
 			activityService.saveActivity(a);
-			return ResponseEntity.ok().body(new Success(true, "Activité créée avec succès.", new Date()));
+			return ResponseEntity.ok().body(new SuccessDetails(true, "Activité créée avec succès.", new Date()));
 
 		}
 	}
@@ -72,7 +72,7 @@ public class ActivityController {
 	 * Update an activity
 	 **/
 	@PutMapping("/{id}")
-	public ResponseEntity<Success> updateActivity(@PathVariable(value = "id") Long id,
+	public ResponseEntity<SuccessDetails> updateActivity(@PathVariable(value = "id") Long id,
 			@Valid @RequestBody Activity activityDetails) {
 		Activity a = null;
 
@@ -96,7 +96,7 @@ public class ActivityController {
 			}
 
 			activityService.saveActivity(a);
-			return ResponseEntity.ok().body(new Success(true, "Activité modifiée avec succès.", new Date()));
+			return ResponseEntity.ok().body(new SuccessDetails(true, "Activité modifiée avec succès.", new Date()));
 
 		} catch (Exception e) {
 			if (a == null) {

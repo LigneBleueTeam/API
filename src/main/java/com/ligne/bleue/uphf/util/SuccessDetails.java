@@ -1,13 +1,13 @@
-package com.ligne.bleue.uphf.exeptions;
+package com.ligne.bleue.uphf.util;
 
 import java.util.Date;
 
-public class Success {
+public class SuccessDetails {
 	private Date timestamp;
 	private boolean success;
 	private String message;
 
-	public Success(boolean success, String message, Date timestamp) {
+	public SuccessDetails(boolean success, String message, Date timestamp) {
 		super();
 		this.success = success;
 		this.message = message;

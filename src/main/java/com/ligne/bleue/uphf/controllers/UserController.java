@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ligne.bleue.uphf.exeptions.EmptyFieldsException;
-import com.ligne.bleue.uphf.exeptions.Success;
 import com.ligne.bleue.uphf.exeptions.UserNotFoundException;
 import com.ligne.bleue.uphf.models.User;
 import com.ligne.bleue.uphf.services.UserService;
+import com.ligne.bleue.uphf.util.SuccessDetails;
 
 @RestController
 @RequestMapping("/api/user")
@@ -57,14 +57,14 @@ public class UserController {
 	 * Create a new user
 	 **/
 	@PostMapping("/save")
-	public ResponseEntity<Success> createUser(@RequestBody User user) {
+	public ResponseEntity<SuccessDetails> createUser(@RequestBody User user) {
 		if (user.getEmail() == null || user.getFirstName() == null || user.getHeight() == 0
 				|| user.getLastName() == null || user.getPassword() == null || user.getPhoneNumber() == null
 				|| user.getRoles().isEmpty() || user.getTypeUser() == null || user.getWeight() == 0) {
 			throw new EmptyFieldsException();
 		} else {
 			userService.saveUser(user);
-			return ResponseEntity.ok().body(new Success(true, "Utilisateur crée avec succès.", new Date()));
+			return ResponseEntity.ok().body(new SuccessDetails(true, "Utilisateur crée avec succès.", new Date()));
 		}
 	}
 
@@ -72,7 +72,7 @@ public class UserController {
 	 * Update a user
 	 **/
 	@PutMapping("/{id}")
-	public ResponseEntity<Success> updateUser(@PathVariable(value = "id") Long id,
+	public ResponseEntity<SuccessDetails> updateUser(@PathVariable(value = "id") Long id,
 			@Valid @RequestBody User userDetails) {
 		User user = null;
 		try {
@@ -107,7 +107,7 @@ public class UserController {
 			}
 			
 			userService.saveUser(user);
-			return ResponseEntity.ok().body(new Success(true, "Utilisateur modifié avec succès.", new Date()));
+			return ResponseEntity.ok().body(new SuccessDetails(true, "Utilisateur modifié avec succès.", new Date()));
 		} catch (Exception e) {
 			if (user == null) {
 				throw new UserNotFoundException(id);
