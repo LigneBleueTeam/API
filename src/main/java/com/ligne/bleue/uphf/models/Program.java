@@ -14,12 +14,18 @@ public class Program {
 	private int level;
 	private String name;
 	private int objective;
+	private float minHeight, maxHeight, minWeight, maxWeight;
 
-	public Program(int level, String name, int objective) {
+	public Program(int level, String name, int objective, float minHeight, float maxHeight, float minWeight,
+			float maxWeight) {
 		super();
 		this.level = level;
 		this.name = name;
 		this.objective = objective;
+		this.minHeight = minHeight;
+		this.maxHeight = maxHeight;
+		this.minWeight = minWeight;
+		this.maxWeight = maxWeight;
 	}
 
 	public Program() {
@@ -57,6 +63,38 @@ public class Program {
 
 	public void setObjective(int objective) {
 		this.objective = objective;
+	}
+
+	public float getMinHeight() {
+		return minHeight;
+	}
+
+	public void setMinHeight(float minHeight) {
+		this.minHeight = minHeight;
+	}
+
+	public float getMaxHeight() {
+		return maxHeight;
+	}
+
+	public void setMaxHeight(float maxHeight) {
+		this.maxHeight = maxHeight;
+	}
+
+	public float getMinWeight() {
+		return minWeight;
+	}
+
+	public void setMinWeight(float minWeight) {
+		this.minWeight = minWeight;
+	}
+
+	public float getMaxWeight() {
+		return maxWeight;
+	}
+
+	public void setMaxWeight(float maxWeight) {
+		this.maxWeight = maxWeight;
 	}
 
 }

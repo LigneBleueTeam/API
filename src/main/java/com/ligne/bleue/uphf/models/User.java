@@ -23,12 +23,13 @@ public class User {
 	private String email;
 	private String password;
 	private String typeUser;
+	private String gender;
 	private float height, weight;
 	private String phoneNumber;
 	private List<Role> roles = new ArrayList<>();
 
 	public User(String lastName, String firstName, String typeUser, float height, float weight, String phoneNumber,
-			String email, String password) {
+			String email, String password, String gender) {
 		super();
 		this.firstName = lastName;
 		this.lastName = firstName;
@@ -38,6 +39,7 @@ public class User {
 		this.height = height;
 		this.weight = weight;
 		this.phoneNumber = phoneNumber;
+		this.gender = gender;
 	}
 
 	public User() {
@@ -125,6 +127,14 @@ public class User {
 
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
 }

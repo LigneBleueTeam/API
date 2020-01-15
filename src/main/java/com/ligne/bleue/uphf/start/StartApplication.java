@@ -39,11 +39,11 @@ public class StartApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {	
-		User user1 = new User("Samad", "BD","Adult",190, 90, "0755060213", "samad@gfx.bd", "password_2019");
-		User user2 = new User("Messi", "RF","Kid",180, 80, "0755060213", "messi@tiznit.ma", "password_2019");
-		User user3 = new User("Josèphe", "De Nazareth", "Adult",200, 100, "0755060213","josephe@legion.mk", "password_2019");
-		User user4 = new User("Msika", "Manfalouti", "Adult",200, 100, "0755060213","msika@manf.ma", "password_2019");
-		User user5 = new User("Moutcho", "Deprio", "Adult",200, 100, "0755060213","moutcho@uphf.fr", "password_2019");
+		User user1 = new User("Samad", "BD","Adult",190, 90, "0755060213", "samad@gfx.bd", "password_2019","Homme");
+		User user2 = new User("Messi", "RF","Kid",180, 80, "0755060213", "messi@tiznit.ma", "password_2019","Homme");
+		User user3 = new User("Josèphe", "De Nazareth", "Adult",200, 100, "0755060213","josephe@legion.mk", "password_2019","Homme");
+		User user4 = new User("Msika", "Manfalouti", "Adult",200, 100, "0755060213","msika@manf.ma", "password_2019","Femme");
+		User user5 = new User("Moutcho", "Deprio", "Adult",200, 100, "0755060213","moutcho@uphf.fr", "password_2019","Homme");
 
 		
 		Role role1 = new Role("USER");
@@ -53,9 +53,9 @@ public class StartApplication implements CommandLineRunner {
 		Activity a2 = new Activity(2, "ISTV 2", "Push up", "40 mins", "Type 2");
 		Activity a3 = new Activity(1, "ISTV 3", "Marathon", "2 heures", "Type 3");
 		
-		Program p1 = new Program(1, "Perte de poids",1);
-		Program p2 = new Program(2, "Gagner du poids",3);
-		Program p3 = new Program(3, "Les abdos",2);
+		Program p1 = new Program(1, "Perte de poids",1, 160, 175, 60, 75);
+		Program p2 = new Program(2, "Gagner du poids",3, 180, 195, 80, 95);
+		Program p3 = new Program(3, "Les abdos",2, 160, 188, 60, 88);
 		
 		user1.getRoles().add(role1);
 		user1.getRoles().add(role2);
