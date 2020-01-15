@@ -1,4 +1,4 @@
-# API | http://lignebleue.ddns.net:8080/api
+# API | http://lignebleue.sytes.net:8080/api
 
 ## USER
 
